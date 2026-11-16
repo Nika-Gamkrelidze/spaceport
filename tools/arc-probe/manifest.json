@@ -1,0 +1,2 @@
+{"manifest_version":3,"name":"Arc Probe","version":"0.1","description":"Shows which extension APIs this browser exposes. Read-only.",
+ "permissions":["tabs","tabGroups","bookmarks"],"action":{"default_popup":"probe.html"}}
