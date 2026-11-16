@@ -13,7 +13,8 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      # shortcut: npm ci rejects a macOS-made lockfile over rolldown's optional wasm binding deps; return to npm ci when npm fixes it
+      - run: npm install --no-audit --no-fund
       - run: npm run check:data
       - run: npm run compile
       - run: npm test
