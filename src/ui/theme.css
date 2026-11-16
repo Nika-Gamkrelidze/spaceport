@@ -1,0 +1,51 @@
+/* Spaceport design tokens. One action color; space colors are Chrome's own tab-group colors so the sidebar matches native groups. */
+:root {
+  --bg: #f3f5f8;
+  --surface: #ffffff;
+  --ink: #18202c;
+  --muted: #5c6678;
+  --line: #dce1e8;
+  --accent: #0b7285;
+  --accent-ink: #ffffff;
+  --danger: #b42318;
+  --focus: #0b7285;
+
+  --g-grey: #5f6368; --g-blue: #1a73e8; --g-red: #d93025; --g-yellow: #e8a600; --g-green: #188038;
+  --g-pink: #d01884; --g-purple: #a142f4; --g-cyan: #007b83; --g-orange: #fa903e;
+
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --fs-xs: 12px; --fs-s: 13px; --fs-m: 15px; --fs-l: 20px; --fs-xl: 28px;
+  --radius: 6px;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #10141a; --surface: #171c24; --ink: #e6ebf2; --muted: #96a0b2; --line: #283040;
+    --accent: #3bc9db; --accent-ink: #0c1a1f; --danger: #ff8a7a; --focus: #3bc9db;
+    --g-grey: #9aa0a6; --g-blue: #8ab4f8; --g-red: #f28b82; --g-yellow: #fdd663; --g-green: #81c995;
+    --g-pink: #ff8bcb; --g-purple: #c58af9; --g-cyan: #78d9ec; --g-orange: #fcad70;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font: 400 var(--fs-s)/1.45 var(--font); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+
+.btn {
+  border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius);
+  padding: 6px 12px; cursor: pointer; font-weight: 600;
+}
+.btn:hover { border-color: var(--muted); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn-primary:hover { filter: brightness(1.08); border-color: var(--accent); }
+.btn:disabled { opacity: .5; cursor: default; }
+.btn-quiet { border-color: transparent; background: transparent; font-weight: 400; padding: 4px 6px; }
+.btn-quiet:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); border-color: transparent; }
+
+.muted { color: var(--muted); }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.input { border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius); padding: 6px 8px; width: 100%; }

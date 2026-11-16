@@ -1,0 +1,53 @@
+@import '../../src/ui/theme.css';
+
+html, body, #root { height: 100%; }
+.shell { display: grid; grid-template-columns: 44px 1fr; height: 100%; }
+
+/* The rail: one colored berth per space; the active one widens. This is the one bold element. */
+.rail { display: flex; flex-direction: column; gap: 6px; padding: 10px 0 10px 6px; background: var(--surface); border-right: 1px solid var(--line); overflow-y: auto; }
+.berth { --c: var(--g-grey); position: relative; width: 26px; height: 34px; border: 0; border-radius: 5px 0 0 5px; cursor: pointer;
+  background: color-mix(in srgb, var(--c) 22%, var(--surface)); color: var(--c); font-weight: 600; font-size: var(--fs-xs);
+  transition: width .15s ease, background-color .15s ease; }
+.berth:hover { background: color-mix(in srgb, var(--c) 38%, var(--surface)); }
+.berth.is-on { width: 38px; background: var(--c); color: var(--surface); }
+.berth-add { --c: var(--muted); background: transparent; border: 1px dashed var(--line); border-right: 0; font-size: var(--fs-m); }
+
+.pane { overflow-y: auto; padding-bottom: 56px; }
+.space-head { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 4px 8px; padding: 12px 12px 8px; }
+.space-title { font-size: var(--fs-l); font-weight: 600; margin: 0; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.head-actions { display: flex; opacity: 0; transition: opacity .15s; }
+.space-head:hover .head-actions, .space-head:focus-within .head-actions { opacity: 1; }
+.search { grid-column: 1 / -1; }
+
+.favs { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0 12px 8px; margin: 0; }
+.fav { width: 32px; height: 32px; border-radius: var(--radius); border: 1px solid var(--line); background: var(--surface); font-weight: 600; cursor: pointer; }
+
+.tree, .today ul { list-style: none; margin: 0; padding: 0 6px; }
+.row { display: flex; align-items: center; gap: 6px; width: 100%; min-height: 30px; padding: 3px 6px 3px 10px; border: 0; border-radius: var(--radius);
+  background: transparent; text-align: left; cursor: pointer; position: relative; }
+.row:hover { background: color-mix(in srgb, var(--ink) 6%, transparent); }
+.row:focus-visible { outline-offset: -2px; }
+.row-icon { width: 14px; flex: none; display: grid; place-items: center; color: var(--muted); font-size: var(--fs-xs); }
+.row-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.kind-folder .row-name { font-weight: 600; }
+.kind-note { color: var(--muted); cursor: default; }
+.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--line); }
+.row.is-open .dot, .row.is-away .dot { background: var(--accent); }
+.row.is-away .row-name { font-style: italic; }
+.row-remove { opacity: 0; padding: 0 4px; }
+.row:hover .row-remove, .row:focus-within .row-remove { opacity: 1; }
+.row.is-dragging { opacity: .4; }
+.back { padding: 0 4px; color: var(--accent); }
+.rename { padding: 2px 6px; }
+
+.today { margin-top: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
+.today h2 { font-size: var(--fs-xs); font-weight: 600; color: var(--muted); margin: 0 0 4px 16px; }
+.pad { padding: 8px 16px; }
+
+.empty { padding: 32px 20px; max-width: 34ch; }
+.empty h1 { font-size: var(--fs-l); font-weight: 600; margin: 0 0 8px; }
+
+.toast { position: fixed; left: 52px; right: 8px; bottom: 8px; display: flex; align-items: center; gap: 4px; padding: 6px 6px 6px 12px;
+  background: var(--ink); color: var(--bg); border-radius: var(--radius); }
+.toast span { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.toast .btn-quiet { color: var(--bg); }

@@ -1,0 +1,39 @@
+@import '../../src/ui/theme.css';
+
+.page { max-width: 720px; padding: 40px 24px 64px; margin: 0 auto 0 max(24px, calc(50% - 420px)); font-size: var(--fs-m); }
+.page-head h1 { font-size: var(--fs-xl); line-height: 1.15; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 8px; max-width: 22ch; }
+.page-head p { margin: 0 0 8px; max-width: 64ch; }
+.deadline { border-left: 3px solid var(--g-orange); padding: 6px 12px; background: var(--surface); }
+
+.steps { list-style: none; padding: 0; margin: 32px 0 0; }
+.step { display: grid; grid-template-columns: 32px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); }
+.step-n { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; font-weight: 600; font-size: var(--fs-s);
+  border: 1px solid var(--line); color: var(--muted); }
+.step.is-active .step-n { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.step.is-done .step-n { color: var(--accent); border-color: var(--accent); }
+.step h2 { font-size: var(--fs-m); font-weight: 600; margin: 3px 0 10px; }
+.step:not(.is-active):not(.is-done) h2 { color: var(--muted); }
+.step-body > p { max-width: 64ch; }
+
+.path { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 6px 6px 6px 12px; margin: 8px 0 16px; }
+.path code { flex: 1; overflow-wrap: anywhere; font-size: var(--fs-s); }
+.drop { display: flex; align-items: center; gap: 12px; padding: 20px; border: 1.5px dashed var(--line); border-radius: var(--radius); cursor: pointer; }
+.drop.is-over, .drop:focus-within { border-color: var(--accent); }
+.error { color: var(--danger); }
+
+.stack > * + * { margin-top: 12px; }
+.row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.spaces { list-style: none; padding: 0; margin: 0; border-top: 1px solid var(--line); }
+.space-row { padding: 10px 0; border-bottom: 1px solid var(--line); }
+.space-pick { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; cursor: pointer; }
+.space-pick input { align-self: center; }
+.swatch { width: 10px; height: 10px; border-radius: 3px; align-self: center; flex: none; }
+.space-name { font-weight: 600; }
+.note { display: block; margin: 6px 0 0 44px; font-size: var(--fs-s); color: var(--muted); }
+.modes { border: 0; padding: 0; margin: 20px 0 0; }
+.modes legend { font-weight: 600; margin-bottom: 6px; }
+.modes label { display: block; padding: 4px 0; }
+.safe-copy { margin-top: 28px; }
+.safe-copy summary, details summary { cursor: pointer; font-weight: 600; }
+.safe-copy .input { max-width: 260px; }
+.outcomes { padding-left: 18px; margin: 0; }

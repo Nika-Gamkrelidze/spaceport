@@ -17,9 +17,15 @@ const KEY = 'library';
 
 export const emptyLibrary = (): Library => ({ version: 1, spaces: [], favorites: {} });
 
-/** FNV-1a over the space's JSON: cheap, stable fingerprint for "edited since import". */
+/** JSON with object keys sorted, so the same data always serializes the same way. */
+const stableJson = (v: unknown): string =>
+  Array.isArray(v) ? `[${v.map(stableJson).join(',')}]`
+  : v && typeof v === 'object' ? `{${Object.keys(v).sort().map((k) => `${JSON.stringify(k)}:${stableJson((v as Record<string, unknown>)[k])}`).join(',')}}`
+  : JSON.stringify(v) ?? 'null';
+
+/** FNV-1a over the space's key-sorted JSON: cheap fingerprint for "edited since import", independent of field order. */
 export function spaceHash(space: Space): string {
-  const text = JSON.stringify(space);
+  const text = stableJson(space);
   let h = 0x811c9dc5;
   for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 0x01000193);
   return (h >>> 0).toString(16);

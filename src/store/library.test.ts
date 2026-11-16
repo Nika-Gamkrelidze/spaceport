@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { applyImport, emptyLibrary, loadLibrary, planImport, saveLibrary, type StorageArea } from './library';
+import { applyImport, emptyLibrary, loadLibrary, planImport, saveLibrary, spaceHash, type StorageArea } from './library';
 import type { Space } from '../model';
 
 const space = (id: string, name: string, url = 'https://a.example'): Space => ({
@@ -71,6 +71,14 @@ describe('applying an import', () => {
     lib.spaces[0]!.space.name = 'Edited';
     lib = applyImport(lib, [space('s1', 'Work')], {}, NOW);
     expect(lib.spaces.map((s) => s.space.name)).toEqual(['Edited']);
+  });
+});
+
+describe('edit fingerprint', () => {
+  test('does not depend on the order of fields', () => {
+    const a: Space = { id: 's', name: 'W', arcProfile: 'default', pinned: [{ kind: 'tab', id: 't', url: 'https://a.example', title: 'A', customName: 'N' }], today: [] };
+    const b = { today: [], pinned: [{ customName: 'N', title: 'A', url: 'https://a.example', id: 't', kind: 'tab' }], arcProfile: 'default', name: 'W', id: 's' } as Space;
+    expect(spaceHash(a)).toBe(spaceHash(b));
   });
 });
 
